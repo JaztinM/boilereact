@@ -1,0 +1,91 @@
+.header {
+  height: 56px;
+  background-color: var(--mantine-color-body);
+  border-bottom: 1px solid light-dark(var(--mantine-color-gray-3), #e1f1ff6c);
+  padding-left: var(--mantine-spacing-md);
+  padding-right: var(--mantine-spacing-md);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: light-dark(var(--mantine-color-gray-0), #101826);
+  z-index: 9;
+}
+
+.inner {
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link {
+  display: block;
+  line-height: 1;
+  padding: 8px 12px;
+  border-radius: var(--mantine-radius-sm);
+  text-decoration: none;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 500;
+
+  @mixin hover {
+    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  }
+}
+
+.theme_mode {
+  padding: 2px;
+  height: 20px;
+  width: 40px;
+  border-radius: 50px;
+  position: relative;
+  border: light-dark(1px, 1px) solid light-dark(var(--mantine-color-gray-5), transparent);
+}
+
+.theme_mode[scheme='light'] {
+  padding: 2px;
+  height: 20px;
+  width: 40px;
+  border-radius: 50px;
+  position: relative;
+  background-color: white;
+}
+
+.theme_mode[scheme='light'] > span {
+  transition: margin-left 150ms ease-in-out !important;
+  width: 50%;
+  margin-left: 0;
+}
+
+.theme_mode[scheme='dark'] > span {
+  position: relative;
+  margin-left: 50%;
+
+  border-radius: 50px;
+  transition: margin-left 150ms ease-in-out !important;
+  width: 50%;
+}
+
+.theme_mode > span > span[scheme='dark'] {
+  background-color: white;
+  width: 100%;
+  border-radius: 50px;
+}
+
+.theme_mode[scheme='light'] > span > span {
+  background-color: rgb(70, 70, 70);
+  width: 100%;
+  border-radius: 50px;
+  color: white;
+  display: grid;
+  place-content: center;
+}
+
+.theme_mode[scheme='dark'] > span > span {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  border-radius: 50px;
+  color: black;
+  place-content: center;
+}

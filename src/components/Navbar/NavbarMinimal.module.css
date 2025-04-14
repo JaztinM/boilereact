@@ -1,0 +1,65 @@
+.navbar {
+  width: 80px;
+  height: 750px;
+  padding: var(--mantine-spacing-md);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid light-dark(var(--mantine-color-gray-3), #e1f1ff6c);
+  background-color: light-dark(var(--mantine-color-gray-0), #101826);
+  transition: width 150ms ease;
+  z-index: 10;
+  position: fixed;
+}
+
+.navbar:hover {
+  width: 220px;
+
+  & .link {
+    gap: 1rem;
+  }
+
+  & .link > p {
+    width: auto;
+  }
+}
+
+.navbarMain {
+  flex: 1;
+  margin-top: 50px;
+}
+
+.link {
+  height: 50px;
+  border-radius: var(--mantine-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
+  padding: var(--mantine-spacing-sm);
+
+  &:hover {
+    background-color: light-dark(var(--mantine-color-gray-0), #17212e);
+  }
+
+  & > p {
+    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-white));
+  }
+
+  &[data-active] {
+    &,
+    &:hover {
+      background-color: var(--mantine-color-blue-light);
+      color: var(--mantine-color-blue-light-color);
+    }
+  }
+}
+
+.link > svg {
+  opacity: 1;
+}
+
+.link > p {
+  overflow: hidden;
+  width: 0;
+}
