@@ -1,0 +1,193 @@
+.postCreator {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-8));
+    box-shadow: 0 2px 8px light-dark(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.25));
+    border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+}
+
+.inputContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.avatar {
+    flex-shrink: 0;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.input {
+    flex-grow: 1;
+}
+
+.inputRoot {
+    width: 100%;
+}
+
+.inputField {
+    border-radius: 20px !important;
+    background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6)) !important;
+    border: none !important;
+    font-size: 14px !important;
+    height: 40px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    transition: background-color 0.2s ease;
+    color: light-dark(var(--mantine-color-dark-7), var(--mantine-color-gray-0)) !important;
+}
+
+.inputField:focus {
+    background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5)) !important;
+    box-shadow: none !important;
+}
+
+.imagesContainer {
+    margin-bottom: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.singleImageLayout,
+.twoImagesLayout,
+.threeImagesLayout,
+.fourImagesLayout {
+    display: grid;
+    gap: 4px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.singleImageLayout {
+    grid-template-columns: 1fr;
+    max-height: 300px;
+}
+
+.twoImagesLayout {
+    grid-template-columns: repeat(2, 1fr);
+    max-height: 250px;
+}
+
+.threeImagesLayout {
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    max-height: 300px;
+}
+
+.threeImagesLayout .imageWrapper:first-child {
+    grid-row: span 2;
+}
+
+.fourImagesLayout {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    max-height: 300px;
+}
+
+.imageWrapper {
+    position: relative;
+    height: 100%;
+    min-height: 120px;
+    overflow: hidden;
+    background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6));
+}
+
+.uploadedImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.removeImageBtn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    color: white !important;
+    border-radius: 50%;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.removeImageBtn:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.actionButtonsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+}
+
+.actionButtons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding-left: 8px;
+}
+
+.postButton {
+    background-color: var(--mantine-color-blue-6) !important;
+    border-radius: 6px;
+    padding: 6px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    color: white !important;
+}
+
+.postButton:hover:not(:disabled) {
+    background-color: var(--mantine-color-blue-7) !important;
+}
+
+.postButton:disabled {
+    background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5)) !important;
+    color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-3)) !important;
+}
+
+@media (max-width: 600px) {
+    .postCreator {
+        width: 95%;
+        border-radius: 6px;
+        padding: 12px;
+    }
+
+    .actionButtonsContainer {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .actionButtons {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .postButton {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .singleImageLayout,
+    .twoImagesLayout,
+    .threeImagesLayout,
+    .fourImagesLayout {
+        max-height: none;
+    }
+
+    .imageWrapper {
+        min-height: 100px;
+    }
+}

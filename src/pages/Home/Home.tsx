@@ -6,13 +6,14 @@ import { useShape } from '@electric-sql/react'
 import { Anchor, Box, Button, Container, Flex, Image, Input, Text, Title } from '@mantine/core'
 import { S } from 'vitest/dist/reporters-yx5ZTtEV.js'
 
-import { CarouselCard } from '@/components'
+import { CarouselCard, PostCreator } from '@/components'
 import { Header, Navbar } from '@/components'
 import { get } from '@/libs'
 import { axios } from '@/libs'
 import { GET_TOKENS } from '@/pgSchemas'
-
 import classes from './Home.module.css'
+
+import Posts from '@/components/Posts'
 
 type Item = { id: string }
 const baseUrl = import.meta.env.ELECTRIC_URL ?? `http://localhost:4000`
@@ -70,152 +71,82 @@ const Home: FC = (): JSX.Element => {
     fetchData()
   }, [])
 
+  // Test data for multiple image examples
+  const samplePosts = [
+    {
+      name: 'Lighthouse',
+      content: 'We help people connect boldly without fear of judgment, harm, or shame.',
+      time: '6h',
+      icon: 'https://placehold.co/40x40/007bff/ffffff?text=L',
+      images: ['https://placehold.co/600x400/e2e2e2/808080?text=Single+Image'],
+      likes: '1.8k others',
+      comments: 'no comments yet'
+    },
+    {
+      name: 'John',
+      content: 'Check out these two photos from my vacation! The beach was absolutely stunning with crystal clear waters and pristine white sand. We spent the entire day just relaxing and soaking up the sun. The mountains were even more breathtaking - we hiked for hours and the views from the summit were worth every step.',
+      time: '10 minutes ago',
+      icon: 'https://placehold.co/40x40/17a2b8/ffffff?text=J',
+      images: [
+        'https://placehold.co/600x400/87CEEB/333333?text=Beach',
+        'https://placehold.co/600x400/98FB98/333333?text=Mountain'
+      ],
+      likes: '42 others',
+      comments: '5 comments'
+    },
+    {
+      name: 'Sarah',
+      content: 'My trip to the museum was amazing! Here are some highlights: The art exhibition featured works from renowned artists spanning three centuries. The modern art section was particularly fascinating, with interactive installations that challenged conventional perspectives. I spent hours in the historical artifacts section, where they had a special display of ancient Egyptian relics that were recently discovered. The guided tour provided so much insight into the creative processes behind each masterpiece.',
+      time: '2h',
+      icon: 'https://placehold.co/40x40/fd7e14/ffffff?text=S',
+      images: [
+        'https://placehold.co/600x800/FFB6C1/333333?text=Art+1',
+        'https://placehold.co/600x400/F0E68C/333333?text=Art+2',
+        'https://placehold.co/600x400/D8BFD8/333333?text=Art+3'
+      ],
+      likes: '128 others',
+      comments: '24 comments'
+    },
+    {
+      name: 'Mike',
+      content: 'Photos from yesterday\'s conference:',
+      time: '1d',
+      icon: 'https://placehold.co/40x40/20c997/ffffff?text=M',
+      images: [
+        'https://placehold.co/600x400/B0C4DE/333333?text=Panel',
+        'https://placehold.co/600x400/ADD8E6/333333?text=Speaker',
+        'https://placehold.co/600x400/AFEEEE/333333?text=Audience',
+        'https://placehold.co/600x400/B0E0E6/333333?text=Venue'
+      ],
+      likes: '301 others',
+      comments: '42 comments'
+    },
+    {
+      name: 'Emily',
+      content: 'Photos from our team building event: It was such a productive day filled with fun activities and meaningful discussions. We started with icebreakers, followed by problem-solving challenges that really pushed us to think creatively and work together. The afternoon session included a workshop on effective communication, where we practiced active listening and giving constructive feedback. We ended the day with a casual dinner where everyone shared their personal goals for the upcoming quarter. This kind of team bonding is absolutely essential for building a positive workplace culture and improving overall collaboration.',
+      time: '3d',
+      icon: 'https://placehold.co/40x40/dc3545/ffffff?text=E',
+      images: [
+        'https://placehold.co/600x400/F08080/333333?text=Team+1',
+        'https://placehold.co/600x400/E9967A/333333?text=Team+2',
+        'https://placehold.co/600x400/FA8072/333333?text=Team+3',
+        'https://placehold.co/600x400/FFA07A/333333?text=Team+4',
+        'https://placehold.co/600x400/FF7F50/333333?text=Team+5',
+        'https://placehold.co/600x400/FF6347/333333?text=Team+6'
+      ],
+      likes: '98 others',
+      comments: '15 comments'
+    }
+  ];
+
   return (
-    <Container className={classes.container} fluid style={{ margin: 0, padding: '0' }}>
-      <Flex
-        display="flex"
-        direction="column"
-        justify="center"
-        align="center"
-        h="100%"
-        gap="lg"
-        ml="80px"
-      >
-        <Header />
-        <Box className={classes.content}>
-          <Flex direction="column" justify="center" align="start" gap="1.5rem">
-            <Title order={3}>Research Tasks</Title>
-            <Box className={classes.top_voted}>
-              <Title order={4}>Research Configurations</Title>
-              <Box className={classes.research_config_container}>
-                <Box>
-                  <Button
-                    className={classes.specific}
-                    onClick={() => {
-                      setConfig({ ...config, type: 'specific' })
-                    }}
-                  >
-                    <Title order={3}>Specific Influerncer</Title>
-                    <Text size="sm">Research a known health influencer by name</Text>
-                  </Button>
-
-                  <Box>
-                    <Title order={4}>Time Range</Title>
-                    <Box className={classes.research_config_container}>
-                      <Box className={classes.timeframe_container}>
-                        <Button
-                          className={classes.specific}
-                          onClick={() => {
-                            setConfig({ ...config, timeRange: 'Last Week' })
-                          }}
-                        >
-                          <Text size="md">Last Week</Text>
-                        </Button>
-                        <Button
-                          className={classes.specific}
-                          onClick={() => {
-                            setConfig({ ...config, timeRange: 'Last Month' })
-                          }}
-                        >
-                          <Text size="md">Last Month</Text>
-                        </Button>
-                        <Button
-                          className={classes.specific}
-                          onClick={() => {
-                            setConfig({ ...config, timeRange: 'Last Year' })
-                          }}
-                        >
-                          <Text size="md">Last Year</Text>
-                        </Button>
-                        <Button
-                          className={classes.specific}
-                          onClick={() => {
-                            setConfig({ ...config, timeRange: 'All Time' })
-                          }}
-                        >
-                          <Text size="md">All Time</Text>
-                        </Button>
-                      </Box>
-                    </Box>
-                  </Box>
-
-                  <Box className={classes.search_influencer}>
-                    <Title order={5}>Influencer Name</Title>
-                    <Input
-                      placeholder="Enter Influencer Name"
-                      onChange={(e) => {
-                        setConfig({ ...config, influencerName: e.target.value })
-                      }}
-                    />
-                  </Box>
-
-                  <Box className={classes.search_influencer}>
-                    <Title order={5}>Claims to Analyze for Influencer</Title>
-                    <Input
-                      type="number"
-                      placeholder="Enter Number"
-                      onChange={(e) => {
-                        setConfig({ ...config, claimsNumber: Number(e.target.value) })
-                      }}
-                    />
-                  </Box>
-                </Box>
-                <Box>
-                  <Button
-                    className={classes.discover_new}
-                    onClick={() => {
-                      setConfig({ ...config, type: 'new' })
-                    }}
-                  >
-                    <Title order={3}>Discover New</Title>
-                    <Text size="sm">Research a known health influencer by name</Text>
-                  </Button>
-                </Box>
-                <Box className={classes.journal_container}>
-                  <Title order={5}>Scientific Journals</Title>
-                  <Box className={classes.journal_button_container}>
-                    <Button className={classes.journal_button}>
-                      <Text size="md">PubMed Central</Text>
-                      <Button></Button>
-                    </Button>
-                    <Button className={classes.journal_button}>
-                      <Text size="md">JAMA Network</Text>
-                      <Button></Button>
-                    </Button>
-                    <Button className={classes.journal_button}>
-                      <Text size="md">Nature</Text>
-                      <Button></Button>
-                    </Button>
-                    <Button className={classes.journal_button}>
-                      <Text size="md">New England Journal of Medicine</Text>
-                      <Button></Button>
-                    </Button>
-                  </Box>
-                </Box>
-              </Box>
-              <Box className={classes.submit_button}>
-                <Button>
-                  <Title order={5}>+ Start Research</Title>
-                </Button>
-              </Box>
-            </Box>
-          </Flex>
-
-          <Box style={{ height: '600px', display: 'flex', backgroundColor: '' }}></Box>
-
-          <Box>
-            <Text ta="center" p="sm">
-              Edit <code>src/App.tsx</code> and save to test HMR
-            </Text>
-
-            <Text ta="center" p="sm">
-              Click on the Vite, React and Eruption logos to learn more.
-            </Text>
-          </Box>
-
-          <Box></Box>
-        </Box>
-      </Flex>
+    <Container className={classes.container} fluid style={{ margin: 0, padding: '4rem' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <PostCreator />
+        {samplePosts.map((post, index) => (
+          <Posts key={index} posts={post} />
+        ))}
+      </div>
     </Container>
   )
 }

@@ -1,0 +1,233 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+
+.closeButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 20;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.closeButton:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.layout {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+}
+
+@media (max-width: 992px) {
+    .layout {
+        flex-direction: column;
+    }
+}
+
+.imageSection {
+    flex: 7;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.imageContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.contentSection {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+    overflow: hidden;
+}
+
+.postHeader {
+    margin-bottom: 12px;
+    flex-shrink: 0;
+}
+
+.contentScrollArea {
+    flex: 1;
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.scrollContent {
+    padding-right: 10px;
+}
+
+.postContent {
+    margin-bottom: 16px;
+    color: light-dark(var(--mantine-color-dark-7), var(--mantine-color-gray-0));
+}
+
+.interactions {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.commentsSection {
+    margin-top: 16px;
+}
+
+.commentsContainer {
+    /* Removed as it's no longer used */
+}
+
+.comment {
+    padding: 8px 0;
+    border-bottom: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+}
+
+.commentBody {
+    flex: 1;
+    color: light-dark(var(--mantine-color-dark-7), var(--mantine-color-gray-0));
+}
+
+.commentInputContainer {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+    flex-shrink: 0;
+}
+
+.commentInput input {
+    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
+    color: light-dark(var(--mantine-color-dark-7), var(--mantine-color-gray-0));
+    border-color: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+}
+
+.commentInput input::placeholder {
+    color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-gray-5));
+    opacity: 0.8;
+}
+
+.navButton {
+    position: absolute;
+    top: 50%;
+    margin-top: -24px;
+    /* Half of the height */
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.9;
+    transition: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.navButton:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.navButton:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.prevButton {
+    left: 15px;
+}
+
+.nextButton {
+    right: 15px;
+}
+
+.imageCounter {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.modalContent {
+    padding: 0;
+    background-color: black;
+}
+
+.modalHeader {
+    display: none;
+}
+
+.modalBody {
+    padding: 0;
+    height: 100vh;
+}
+
+.noImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-7));
+    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-2));
+}
+
+.navButtons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.likedButton {
+    color: #ed4956;
+}
+
+.sendButton {
+    color: var(--mantine-color-blue-6);
+}
+
+.sendButton:disabled {
+    color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-dark-3));
+}
+
+@media (max-width: 576px) {
+    .imageSection {
+        height: 40vh;
+    }
+
+    .detailsSection {
+        height: 60vh;
+    }
+}
