@@ -10,6 +10,8 @@
     display: flex;
     width: 100%;
     min-height: 100vh;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .backButton {
@@ -52,9 +54,14 @@
 }
 
 .logo {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 12px;
+    width: 30px;
+    height: 45px;
+}
+
+.logo path,
+.logo rect {
+    fill: light-dark(#1A1A1A, #e1f1ff);
+    stroke: light-dark(#1A1A1A, #e1f1ff);
 }
 
 .title {
@@ -93,6 +100,11 @@
     margin-bottom: 20px;
 }
 
+.formGroup .react-international-phone-country-selector {
+    height: 100%;
+    background-color: red;
+}
+
 .input input {
     background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6)) !important;
     border: none !important;
@@ -105,7 +117,7 @@
     border: none !important;
 }
 
-.signUpButton {
+.signInButton {
     margin-top: 16px;
     height: 42px;
     background-color: var(--mantine-color-blue-6) !important;
@@ -113,8 +125,36 @@
     font-weight: 600;
 }
 
-.signUpButton:hover {
+.signInButton:hover {
     background-color: var(--mantine-color-blue-7) !important;
+}
+
+.divider {
+    margin: 24px 0 !important;
+}
+
+.divider span {
+    color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-gray-5)) !important;
+    font-size: 14px !important;
+    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7)) !important;
+}
+
+.oauthButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.oauthButton {
+    height: 42px;
+    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6)) !important;
+    color: l ight-dark(var(--mantine-color-dark-9), var(--mantine-color-gray-0)) !important;
+    border: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4)) !important;
+}
+
+.oauthButton:hover {
+    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5)) !important;
 }
 
 .loginContainer {
@@ -122,13 +162,13 @@
     text-align: center;
 }
 
-.loginLink {
+.signUpLink {
     color: var(--mantine-color-blue-6);
     font-weight: 500;
     text-decoration: none;
 }
 
-.loginLink:hover {
+.signUpLink:hover {
     text-decoration: underline;
 }
 
