@@ -3,7 +3,7 @@
 }
 
 .container {
-  background-color: light-dark(var(--mantine-color-gray-0), #101826);
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-8));
 }
 
 .content {
@@ -24,7 +24,7 @@
   position: relative;
 }
 
-.featured > div {
+.featured>div {
   height: 100%;
 }
 
@@ -43,7 +43,7 @@
   gap: 1rem;
   flex-wrap: wrap;
 
-  & > div {
+  &>div {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -51,7 +51,7 @@
     padding: 1rem 0;
     gap: 1rem;
 
-    & > button {
+    &>button {
       border-radius: 10px;
       background-color: light-dark(var(--mantine-color-primary), #1b2431);
       border: 2px solid light-dark(var(--mantine-color-gray-5), rgba(225, 241, 255, 0.09));
@@ -64,7 +64,7 @@
         border: 2px solid light-dark(var(--mantine-color-blue-5), #00a588);
       }
 
-      & > span > span {
+      &>span>span {
         white-space: pre-wrap;
         display: flex;
         flex-direction: column;
@@ -84,14 +84,14 @@
   gap: 1rem;
   flex-wrap: wrap;
 
-  & > button {
+  &>button {
     flex-grow: 1;
     flex-basis: 33%;
     padding: 1rem !important;
     min-width: 200px;
     height: 25px;
 
-    & > span {
+    &>span {
       height: 1rem;
     }
   }
@@ -103,18 +103,18 @@
   gap: 0.5rem;
 }
 
-.search_influencer > div > input {
+.search_influencer>div>input {
   background-color: light-dark(var(--mantine-color-gray-5), #101826);
 
   color: light-dark(var(--mantine-color-gray-7), #e1f1ff);
 }
 
-.search_influencer > div > input:not(:focus) {
+.search_influencer>div>input:not(:focus) {
   border: 2px solid rgba(225, 241, 255, 0.09);
   /* Replace with your desired default border color */
 }
 
-.search_influencer > div > input::placeholder {
+.search_influencer>div>input::placeholder {
   color: #e1f1ff;
   /* Replace with your desired placeholder color */
   opacity: 0.5;
@@ -133,7 +133,7 @@
   gap: 1rem;
   flex-wrap: wrap;
 
-  & > button {
+  &>button {
     flex-grow: 1;
     flex-basis: 33%;
     min-width: 200px;
@@ -148,17 +148,17 @@
       background-color: light-dark(var(--mantine-color-blue-light), #183338);
       border: 2px solid light-dark(var(--mantine-color-blue-5), #00a588);
 
-      & span > span > button {
+      & span>span>button {
         background-color: light-dark(var(--mantine-color-blue-5), #00a588);
         border: 2px solid light-dark(var(--mantine-color-blue-5), #00a588);
       }
     }
 
-    & > span {
+    &>span {
       width: 100%;
     }
 
-    & > span > span {
+    &>span>span {
       width: 100%;
       white-space: pre-wrap;
       display: flex;
@@ -169,7 +169,7 @@
       color: light-dark(var(--mantine-color-gray-7), #e1f1ff);
       cursor: pointer;
 
-      & > button {
+      &>button {
         background-color: light-dark(var(--mantine-color-gray-5), #101826);
         border-radius: 50%;
         height: 15px;
@@ -191,7 +191,7 @@
   display: flex;
   align-items: flex-end;
 
-  & > button {
+  &>button {
     margin-left: auto;
     background-color: light-dark(var(--mantine-color-blue-5), #00a588);
   }

@@ -435,21 +435,18 @@ export function SignUp() {
     }
 
     return (
-        <div className={classes.wrapper} style={{
-            backgroundColor: isDark ? '#121212' : '#fff',
-            color: isDark ? '#e0e0e0' : '#000'
-        }}>
-            <button className={classes.backButton} onClick={handleBack} style={{
-                color: isDark ? '#e0e0e0' : '#000'
-            }}>
-                <FaChevronLeft />
-            </button>
-
+        <div className={classes.wrapper} >
             <div className={classes.container}>
-                <div className={classes.leftSection} style={{
-                    backgroundColor: isDark ? '#181818' : '#fff'
-                }}>
+                <div className={classes.leftSection} >
                     <div className={classes.logoContainer}>
+                        <button className={classes.backButton} onClick={handleBack} style={{
+                            color: isDark ? '#e0e0e0' : '#000',
+                            position: 'absolute',
+                            top: '20px',
+                            left: '20px'
+                        }}>
+                            <FaChevronLeft />
+                        </button>
                         <svg width="17" height="40" viewBox="0 0 29 35" fill="none" xmlns="http://www.w3.org/2000/svg" className={classes.logo}>
                             <path d="M11.6759 28.1842C13.5006 27.486 15.0641 26.2427 16.1551 24.6254L16.7063 29.0354C16.9319 30.8402 15.8491 32.5525 14.1217 33.1223L4.00216 36.4607C2.36397 37.0011 0.983011 38.119 0.112825 39.5995L0.795944 34.4761C0.980285 33.0935 1.90602 31.9225 3.20871 31.4241L11.6759 28.1842Z" fill={isDark ? "#e0e0e0" : "#1A1A1A"} stroke={isDark ? "#e0e0e0" : "#1A1A1A"} stroke-width="0.129032" />
                             <path d="M10.9406 17.7976C12.5791 17.1539 13.913 15.9185 14.6812 14.3403L15.2578 18.0034C15.5373 19.7787 14.5369 21.5077 12.8585 22.1502L4.84106 25.2192C3.38744 25.7756 2.20951 26.8677 1.54271 28.2614L2.16061 23.3756C2.33524 21.9947 3.24961 20.8193 4.54505 20.3103L10.9406 17.7976Z" fill={isDark ? "#e0e0e0" : "#1A1A1A"} stroke={isDark ? "#e0e0e0" : "#1A1A1A"} stroke-width="0.129032" />
@@ -463,9 +460,7 @@ export function SignUp() {
                     </div>
                 </div>
 
-                <div className={classes.rightSection} style={{
-                    backgroundColor: isDark ? '#1e1e1e' : '#fff'
-                }}>
+                <div className={classes.rightSection}>
                     <div className={classes.formContainer}>
                         <Text size="xs" c={dimmedTextColor} mb={10}>
                             step {currentStep} of 5

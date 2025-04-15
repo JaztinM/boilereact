@@ -3,14 +3,14 @@
   min-height: 100vh;
   display: flex;
   position: relative;
-  background-color: light-dark(var(--mantine-color-white), #17212e);
+  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-8));
 }
 
 .container {
   display: flex;
   width: 100%;
   min-height: 100vh;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -31,7 +31,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: light-dark(var(--mantine-color-white), #17212e);
   padding: 20px;
 }
 
@@ -40,7 +39,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: light-dark(var(--mantine-color-white), #17212e);
   padding: 20px;
 }
 
@@ -83,7 +81,7 @@
   max-width: 400px;
   padding: 40px;
   border-radius: 8px;
-  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
   box-shadow: 0 4px 14px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
   border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
 }

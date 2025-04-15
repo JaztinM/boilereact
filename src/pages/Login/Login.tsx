@@ -53,9 +53,6 @@ export function Login() {
 
   return (
     <div className={classes.wrapper}>
-      <button className={classes.backButton} onClick={handleBackClick}>
-        ←
-      </button>
 
       <div className={classes.container}>
         <div className={classes.leftSection}>

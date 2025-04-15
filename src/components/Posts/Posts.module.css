@@ -1,7 +1,7 @@
 .posts_container {
     margin-top: 2rem;
     display: flex;
-    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-8));
+    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
     padding: 1rem;
     width: 550px;
     margin: 0 auto;
