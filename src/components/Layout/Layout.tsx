@@ -6,8 +6,8 @@ import { Header, Navbar } from '@/components'
 export function Layout() {
   return (
     <>
-      <Header />
-      <Navbar />
+      {/* <Header /> 
+      <Navbar />*/}
       <Outlet />
     </>
   )

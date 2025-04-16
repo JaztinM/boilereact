@@ -3,10 +3,14 @@ import { useNavigate } from 'react-router-dom'
 
 import { useQuery } from '@apollo/client'
 import { useShape } from '@electric-sql/react'
-import { Anchor, Box, Button, Container, Flex, Image, Input, Text, Title } from '@mantine/core'
+import {
+  Anchor, Box, Button, Container, Flex, Image, Input, Text, Title,
+  Avatar, TextInput, Group, Stack
+} from '@mantine/core'
+import { IconSearch } from '@tabler/icons-react'
 import { S } from 'vitest/dist/reporters-yx5ZTtEV.js'
 
-import { CarouselCard, PostCreator } from '@/components'
+import { CarouselCard, PostCreator, RightSidebar } from '@/components'
 import { Header, Navbar } from '@/components'
 import { get } from '@/libs'
 import { axios } from '@/libs'
@@ -140,13 +144,17 @@ const Home: FC = (): JSX.Element => {
   ];
 
   return (
-    <Container className={classes.container} fluid style={{ margin: 0, padding: '4rem' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+    <Container className={classes.container} fluid>
+      <div className={classes.sidebar}>
+        <Navbar />
+      </div>
+      <div className={classes.post_container}>
         <PostCreator />
         {samplePosts.map((post, index) => (
           <Posts key={index} posts={post} />
         ))}
       </div>
+      <RightSidebar />
     </Container>
   )
 }

@@ -72,7 +72,7 @@ export function PostCreator() {
     };
 
     return (
-        <Paper className={classes.postCreator} shadow="sm">
+        <Paper className={classes.postCreator} >
             <div className={classes.inputContainer}>
                 <Avatar
                     color="blue"

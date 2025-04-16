@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import classes from './Posts.module.css'
 import { PostDetailOverlay } from '../PostDetailOverlay';
+import { FaRegHeart, FaHeart, FaRegComment, FaShare } from 'react-icons/fa';
 
 interface PostImage {
     src: string;
@@ -197,41 +198,38 @@ export default function Posts({ posts }: PostProps) {
                     {renderImages()}
 
                     <div className={classes.interaction_container}>
-                        <div className={classes.likes_section}>
+                        <div className={classes.interaction_buttons}>
                             <div
-                                className={classes.likes}
+                                className={`${classes.interaction_button} ${liked ? classes.liked : ''}`}
                                 onClick={handleLikeClick}
                                 role="button"
                                 tabIndex={0}
                                 aria-label={liked ? "Unlike post" : "Like post"}
                             >
-                                <span className={classes.heart}>
-                                    ❤️
-                                </span>
-                                <span>{posts.likes || "Sheikh Hasina and 1.8k others"}</span>
+                                {liked ? <FaHeart className={classes.icon_liked} /> : <FaRegHeart className={classes.icon} />}
+                                <span>{posts.likes || "200"}</span>
                             </div>
 
                             <div
-                                className={classes.share}
+                                className={classes.interaction_button}
+                                onClick={handleCommentsClick}
+                                role="button"
+                                tabIndex={0}
+                                aria-label="View comments"
+                            >
+                                <FaRegComment className={classes.icon} />
+                                <span>{posts.comments || "120"}</span>
+                            </div>
+
+                            <div
+                                className={classes.interaction_button}
                                 role="button"
                                 tabIndex={0}
                                 aria-label="Share post"
                             >
-                                <span>↗️</span>
+                                <FaShare className={classes.icon} />
+                                <span>4</span>
                             </div>
-                        </div>
-
-                        <div
-                            className={classes.comments_section}
-                            role="button"
-                            tabIndex={0}
-                            aria-label="View comments"
-                            onClick={handleCommentsClick}
-                        >
-                            <div className={classes.comment_icon}>
-                                <span>💬</span>
-                            </div>
-                            <span>{posts.comments || "no comments yet"}</span>
                         </div>
                     </div>
                 </div>

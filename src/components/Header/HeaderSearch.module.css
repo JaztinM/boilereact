@@ -1,6 +1,5 @@
 .header {
   height: 56px;
-  background-color: var(--mantine-color-body);
   border-bottom: 1px solid light-dark(var(--mantine-color-gray-3), #e1f1ff6c);
   padding-left: var(--mantine-spacing-md);
   padding-right: var(--mantine-spacing-md);
@@ -8,7 +7,7 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-9));
+  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
   z-index: 9;
 }
 

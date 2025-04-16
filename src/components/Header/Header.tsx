@@ -7,12 +7,13 @@ import { IconSearch } from '@tabler/icons-react'
 import classes from './HeaderSearch.module.css'
 
 const links = [
-  { link: '/leaderboard', label: 'Leaderboard' },
+  /*{ link: '/leaderboard', label: 'Leaderboard' },
   { link: '/products', label: 'Products' },
   { link: '/monetization', label: 'Monetization' },
   { link: '/about', label: 'About' },
   { link: '/contact', label: 'Contact' },
   { link: '/login', label: 'Login' },
+   */
 ]
 
 export function Header() {

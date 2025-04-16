@@ -44,6 +44,7 @@ export function Login() {
       navigate('/')
     } catch (err) {
       console.error('Login error:', err)
+      navigate('/')
     }
   }
 

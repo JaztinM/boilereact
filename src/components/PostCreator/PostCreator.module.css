@@ -1,11 +1,10 @@
 .postCreator {
     width: 100%;
-    max-width: 600px;
     margin: 0 auto;
     padding: 16px;
-    border-radius: 8px;
+    border-radius: 0 0 15px 15px;
     background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
-    box-shadow: 0 2px 8px light-dark(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.25));
+    /*box-shadow: 0 2px 8px light-dark(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.25));*/
     border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
 }
 

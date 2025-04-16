@@ -9,21 +9,11 @@ import {
 
 import { Header, Navbar, Spinner } from '@/components'
 
-const Layout: FC = () => {
-  return (
-    <>
-      <Header />
-      <Navbar />
-      <Outlet />
-    </>
-  )
-}
 
 const RouterStack = createBrowserRouter(
   createRoutesFromElements(
     <Route
       path="/"
-      element={<Layout />}
       lazy={async () => {
         const { Layout } = await import('@/components/Layout')
         return {

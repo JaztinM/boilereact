@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Center, Stack, Tooltip, UnstyledButton, Text, Button } from '@mantine/core'
+import { useMantineColorScheme } from '@mantine/core'
 import {
   IconHome2,
   IconSearch,
@@ -14,6 +15,8 @@ import {
   IconSettings,
   IconLogout,
   IconPencilPlus,
+  IconSun,
+  IconMoon,
 } from '@tabler/icons-react'
 
 import classes from './NavbarMinimal.module.css'
@@ -27,11 +30,9 @@ interface NavbarLinkProps {
 
 function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
   return (
-    <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
-      <UnstyledButton onClick={onClick} className={classes.link} data-active={active || undefined}>
-        <Icon size={20} stroke={1.5} /> <p>{label}</p>
-      </UnstyledButton>
-    </Tooltip>
+    <UnstyledButton onClick={onClick} className={classes.link} data-active={active || undefined}>
+      <Icon size={20} stroke={1.5} /> <p>{label}</p>
+    </UnstyledButton>
   )
 }
 
@@ -44,6 +45,7 @@ const navbarItems = [
   { icon: IconCompass, label: 'explore' },
   { icon: IconUser, label: 'profile' },
   { icon: IconTrophy, label: 'leaderboard' },
+
 ]
 
 const bottomItems = [
@@ -55,6 +57,7 @@ const bottomItems = [
 export function Navbar() {
   const [active, setActive] = useState(0)
   const navigate = useNavigate()
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme()
 
   const links = navbarItems.map((link, index) => (
     <NavbarLink
@@ -63,7 +66,11 @@ export function Navbar() {
       active={index === active}
       onClick={() => {
         setActive(index)
-        navigate(`/${link.label}`)
+        if (link.label === 'logout') {
+          navigate('/login')
+        } else {
+          navigate(`/${link.label}`)
+        }
       }}
     />
   ))
@@ -73,13 +80,17 @@ export function Navbar() {
       {...link}
       key={link.label}
       onClick={() => {
-        navigate(`/${link.label}`)
+        if (link.label === 'logout') {
+          navigate('/login')
+        } else {
+          navigate(`/${link.label}`)
+        }
       }}
     />
   ))
 
   return (
-    <nav className={classes.navbar} style={{ height: '100vh', position: 'fixed' }}>
+    <nav className={classes.navbar}>
       <div className={classes.logo}>
         <svg width="22" height="38" viewBox="0 0 29 35" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M11.6759 28.1842C13.5006 27.486 15.0641 26.2427 16.1551 24.6254L16.7063 29.0354C16.9319 30.8402 15.8491 32.5525 14.1217 33.1223L4.00216 36.4607C2.36397 37.0011 0.983011 38.119 0.112825 39.5995L0.795944 34.4761C0.980285 33.0935 1.90602 31.9225 3.20871 31.4241L11.6759 28.1842Z" fill="currentColor" stroke="currentColor" stroke-width="0.129032" />
@@ -93,6 +104,9 @@ export function Navbar() {
         <Stack justify="center" gap={8}>
           {links}
         </Stack>
+        <UnstyledButton onClick={() => toggleColorScheme()} className={classes.themeToggleBtn}>
+          {colorScheme === 'dark' ? <IconSun size={20} stroke={1.5} /> : <IconMoon size={20} stroke={1.5} />} <p>{colorScheme === 'dark' ? 'Light mode' : 'Dark mode'}</p>
+        </UnstyledButton>
       </div>
 
       <div className={classes.postButton}>

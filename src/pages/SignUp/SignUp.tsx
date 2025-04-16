@@ -439,12 +439,7 @@ export function SignUp() {
             <div className={classes.container}>
                 <div className={classes.leftSection} >
                     <div className={classes.logoContainer}>
-                        <button className={classes.backButton} onClick={handleBack} style={{
-                            color: isDark ? '#e0e0e0' : '#000',
-                            position: 'absolute',
-                            top: '20px',
-                            left: '20px'
-                        }}>
+                        <button className={classes.backButton} onClick={handleBack} >
                             <FaChevronLeft />
                         </button>
                         <svg width="17" height="40" viewBox="0 0 29 35" fill="none" xmlns="http://www.w3.org/2000/svg" className={classes.logo}>

@@ -1,5 +1,5 @@
 .navbar {
-  width: 90px;
+  width: 100%;
   height: 100vh;
   padding: var(--mantine-spacing-md);
   display: flex;
@@ -8,11 +8,9 @@
   background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
   transition: width 150ms ease;
   z-index: 10;
-  position: fixed;
 }
 
 .navbar:hover {
-  width: 240px;
 
   & .link {
     gap: 1rem;
@@ -36,7 +34,8 @@
   margin-top: 15px;
 }
 
-.link {
+.link,
+.themeToggleBtn {
   height: 40px;
   border-radius: var(--mantine-radius-md);
   display: flex;
@@ -47,6 +46,7 @@
   padding: var(--mantine-spacing-xs);
   margin-bottom: 4px;
   font-size: 15px;
+  gap: 1rem;
 
   &:hover {
     background-color: light-dark(var(--mantine-color-gray-1), #2A2A2A);
@@ -73,9 +73,10 @@
   min-width: 20px;
 }
 
-.link>p {
+.link>p,
+.themeToggleBtn>p {
   overflow: hidden;
-  width: 0;
+  width: auto;
   white-space: nowrap;
   margin-left: 8px;
 }
@@ -94,6 +95,17 @@
 
 .postBtn:hover {
   background-color: light-dark(var(--mantine-color-blue-7), #4a70c7);
+}
+
+
+
+.themeToggleBtn:hover {
+  background-color: light-dark(var(--mantine-color-gray-1), #2A2A2A);
+}
+
+.themeToggleBtn {
+  width: 100%;
+  margin-top: calc(0.5rem* var(--mantine-scale));
 }
 
 .bottomLinks {
