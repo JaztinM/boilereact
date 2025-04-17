@@ -197,6 +197,7 @@ export function SignUp() {
                                 email address
                             </Text>
                             <TextInput
+                                autoComplete="off"
                                 name="email"
                                 placeholder="john@email.com"
                                 value={userInfo.email}
@@ -213,6 +214,7 @@ export function SignUp() {
                                 password
                             </Text>
                             <PasswordInput
+                                autoComplete="new-password"
                                 name="password"
                                 placeholder="*********"
                                 value={userInfo.password}
@@ -408,7 +410,7 @@ export function SignUp() {
                             </div>
                         )}
 
-                        <form onSubmit={(e) => {
+                        <form autoComplete="off" onSubmit={(e) => {
                             e.preventDefault()
                             if (fieldsComplete) {
                                 if (currentStep === 2) {

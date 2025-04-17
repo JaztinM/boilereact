@@ -75,49 +75,55 @@ export function Login() {
 
         <div className={classes.rightSection}>
           <Paper className={classes.formCard} radius="md" withBorder>
-            <h2 className={classes.formTitle}>Sign In</h2>
+            <h2 className={classes.formTitle}>sign In</h2>
 
-            <div className={classes.formGroup}>
-              <label className={classes.label} htmlFor="email">email</label>
-              <TextInput
-                id="email"
-                classNames={{
-                  root: classes.inputRoot,
-                  input: classes.input,
-                }}
-                placeholder="john@email.com"
-                aria-label="Email"
-                leftSection={<IconUser className={classes.userIcon} size={16} />}
-                onChange={(e) => setUserInfoFunction('email', e.target.value)}
-              />
-            </div>
+            <form autoComplete="off" className={classes.form}>
+              <div className={classes.formGroup}>
+                <label className={classes.label} htmlFor="email">email</label>
+                <TextInput
+                  id="email"
+                  name="email"
+                  autoComplete="off"
+                  classNames={{
+                    root: classes.inputRoot,
+                    input: classes.input,
+                  }}
+                  placeholder="john@email.com"
+                  aria-label="Email"
+                  leftSection={<IconUser className={classes.userIcon} size={16} />}
+                  onChange={(e) => setUserInfoFunction('email', e.target.value)}
+                />
+              </div>
 
-            <div className={classes.formGroup}>
-              <label className={classes.label} htmlFor="password">password</label>
-              <PasswordInput
-                id="password"
-                classNames={{
-                  root: classes.inputRoot,
-                  input: classes.input,
-                }}
-                placeholder="••••••••••••"
-                aria-label="Password"
-                leftSection={<IconLock className={classes.lockIcon} size={16} />}
-                onChange={(e) => setUserInfoFunction('password', e.target.value)}
-              />
-              <Link to="/forgot-password" className={classes.forgotLink}>
-                Forgot password?
-              </Link>
-            </div>
+              <div className={classes.formGroup}>
+                <label className={classes.label} htmlFor="password">password</label>
+                <PasswordInput
+                  id="password"
+                  name="password"
+                  autoComplete="new-password"
+                  classNames={{
+                    root: classes.inputRoot,
+                    input: classes.input,
+                  }}
+                  placeholder="••••••••••••"
+                  aria-label="Password"
+                  leftSection={<IconLock className={classes.lockIcon} size={16} />}
+                  onChange={(e) => setUserInfoFunction('password', e.target.value)}
+                />
+                <Link to="/forgot-password" className={classes.forgotLink}>
+                  forgot password?
+                </Link>
+              </div>
 
-            <button
-              type="submit"
-              className={classes.signInButton}
-              disabled={loginLoading}
-              onClick={handleSubmit}
-            >
-              {loginLoading ? 'signing in...' : 'sign in'}
-            </button>
+              <button
+                type="button"
+                className={classes.signInButton}
+                disabled={loginLoading}
+                onClick={handleSubmit}
+              >
+                {loginLoading ? 'signing in...' : 'sign in'}
+              </button>
+            </form>
 
             <Text className={classes.signupText}>
               Don't have an account? <Link to="/signup" className={classes.signUpLink}>sign up</Link>
