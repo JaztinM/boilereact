@@ -3,17 +3,17 @@
     min-height: 100vh;
     display: flex;
     position: relative;
-    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-8));
+    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
 }
 
 .container {
     display: flex;
     width: 100%;
     min-height: 100vh;
-    max-width: 900px;
+    max-width: 950px;
     margin: 0 auto;
+    gap: 1rem;
     justify-content: center;
-    gap: 2rem;
 }
 
 .backButton {
@@ -22,7 +22,7 @@
     margin-top: 0%;
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 1.5rem;
     cursor: pointer;
     z-index: 10;
     color: light-dark(var(--mantine-color-dark-7), var(--mantine-color-gray-3));
@@ -66,14 +66,14 @@
 }
 
 .title {
-    font-size: 28px;
+    font-size: 1.75rem;
     font-weight: 700;
     margin: 8px 0;
     color: light-dark(var(--mantine-color-dark-9), var(--mantine-color-gray-0));
 }
 
 .subtitle {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-gray-4));
     margin-top: 8px;
     text-align: center;
@@ -84,13 +84,13 @@
     max-width: 400px;
     padding: 40px;
     border-radius: 8px;
-    box-shadow: 0 4px 14px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+    box-shadow: 0 1px 1px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
     border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
-    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
+    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9))
 }
 
 .formTitle {
-    font-size: 24px;
+    font-size: 1.8rem;
     font-weight: 600;
     margin-bottom: 24px;
     text-align: center;
@@ -101,21 +101,30 @@
     margin-bottom: 20px;
 }
 
+/* Improved font sizes for form labels */
+.formGroup .mantine-Text-root {
+    font-size: 1rem !important;
+    margin-bottom: 8px;
+}
+
 .formGroup .react-international-phone-country-selector {
     height: 100%;
     background-color: red;
 }
 
 .input input {
-    background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6)) !important;
-    border: none !important;
-    color: light-dark(var(--mantine-color-dark-7), var(--mantine-color-gray-0)) !important;
-    padding: 1rem 0.75rem;
+    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-8));
+    color: light-dark(var(--mantine-color-dark-7), var(--mantine-color-gray-0));
+    padding: 0.5rem 0.5rem;
+    font-size: 1.1rem !important;
+    width: 100%;
+    border-radius: 0;
 }
 
 .inputElement {
-    background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6)) !important;
-    border: none !important;
+
+    border-bottom: 1px solid light-dark(var(--mantine-color-gray-4), var(--mantine-color-gray-0));
+    border-radius: 0;
 }
 
 .signInButton {
@@ -136,7 +145,7 @@
 
 .divider span {
     color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-gray-5)) !important;
-    font-size: 14px !important;
+    font-size: 1rem !important;
 }
 
 .oauthButtons {
@@ -149,17 +158,26 @@
 .oauthButton {
     height: 42px;
     background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6)) !important;
-    color: l ight-dark(var(--mantine-color-dark-9), var(--mantine-color-gray-0)) !important;
+    color: light-dark(var(--mantine-color-dark-9), var(--mantine-color-gray-0)) !important;
     border: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4)) !important;
+    border-radius: 25px !important;
+    text-transform: lowercase !important;
+    height: 44px !important;
+    font-size: 1.1rem !important;
 }
 
 .oauthButton:hover {
     background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5)) !important;
 }
 
+button>span {
+    font-size: 1rem !important;
+}
+
 .loginContainer {
     margin-top: 16px;
-    text-align: center;
+    text-align: left;
+    font-size: 1rem;
 }
 
 .signUpLink {
@@ -170,6 +188,80 @@
 
 .signUpLink:hover {
     text-decoration: underline;
+}
+
+/* Styles for themed button that were inline */
+.themedButton {
+    border-radius: 25px;
+    height: 44px;
+    transition: all 0.2s ease;
+    text-transform: lowercase;
+    font-size: 1.1rem;
+}
+
+.enabledButton {
+    background-color: light-dark(var(--mantine-color-blue-3), var(--mantine-color-blue-2));
+    color: light-dark(#fff, #000) !important;
+    cursor: pointer;
+}
+
+.disabledButton {
+    background-color: light-dark(#e0e0e0, #2c2c2c) !important;
+    color: light-dark(#a0a0a0, #6c6c6c) !important;
+    cursor: not-allowed;
+}
+
+/* Styles for step indicators */
+.stepText {
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-2)) !important;
+}
+
+.stepTitle {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: light-dark(var(--mantine-color-gray-9), white) !important;
+}
+
+.stepSubtitle {
+    font-size: 1rem !important;
+    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-2)) !important;
+}
+
+/* Pin input and verification styling */
+.pinInputContainer {
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.pinInput {
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
+}
+
+.pinInputField {
+    border: 1px solid light-dark(#ccc, #444);
+    border-radius: 4px;
+    width: 42px;
+    height: 48px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    background-color: light-dark(#fff, #2c2c2c);
+    color: light-dark(#000, #e0e0e0);
+}
+
+.usernameOptions {
+    margin-bottom: 15px;
+}
+
+.usernameOption {
+    border-radius: 30px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    transition: all 0.2s ease;
+    font-size: 1rem;
 }
 
 @media (max-width: 768px) {

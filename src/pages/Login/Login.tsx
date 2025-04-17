@@ -12,6 +12,8 @@ import {
   TextInput,
   Title,
 } from '@mantine/core'
+import { Link } from 'react-router-dom'
+import { IconUser, IconLock } from '@tabler/icons-react'
 
 import { LOGIN_USER } from '@/pgSchemas'
 
@@ -72,45 +74,55 @@ export function Login() {
         </div>
 
         <div className={classes.rightSection}>
-          <div className={classes.formContainer}>
+          <Paper className={classes.formCard} radius="md" withBorder>
             <h2 className={classes.formTitle}>Sign In</h2>
 
             <div className={classes.formGroup}>
+              <label className={classes.label} htmlFor="email">email</label>
               <TextInput
-                placeholder="TS00131"
-                classNames={{ root: classes.input, input: classes.inputElement }}
+                id="email"
+                classNames={{
+                  root: classes.inputRoot,
+                  input: classes.input,
+                }}
+                placeholder="john@email.com"
+                aria-label="Email"
+                leftSection={<IconUser className={classes.userIcon} size={16} />}
                 onChange={(e) => setUserInfoFunction('email', e.target.value)}
-                variant="filled"
               />
             </div>
 
             <div className={classes.formGroup}>
+              <label className={classes.label} htmlFor="password">password</label>
               <PasswordInput
+                id="password"
+                classNames={{
+                  root: classes.inputRoot,
+                  input: classes.input,
+                }}
                 placeholder="••••••••••••"
-                classNames={{ root: classes.input, input: classes.inputElement }}
+                aria-label="Password"
+                leftSection={<IconLock className={classes.lockIcon} size={16} />}
                 onChange={(e) => setUserInfoFunction('password', e.target.value)}
-                variant="filled"
               />
+              <Link to="/forgot-password" className={classes.forgotLink}>
+                Forgot password?
+              </Link>
             </div>
 
-            <Button
-              fullWidth
+            <button
+              type="submit"
               className={classes.signInButton}
+              disabled={loginLoading}
               onClick={handleSubmit}
-              loading={loginLoading}
             >
-              Sign in
-            </Button>
+              {loginLoading ? 'signing in...' : 'sign in'}
+            </button>
 
-            <div className={classes.signupContainer}>
-              <Text size="sm" c="dimmed">
-                Don't have an account?{' '}
-                <Anchor component="button" className={classes.signUpLink} onClick={() => navigate('/signup')}>
-                  Sign Up
-                </Anchor>
-              </Text>
-            </div>
-          </div>
+            <Text className={classes.signupText}>
+              Don't have an account? <Link to="/signup" className={classes.signUpLink}>sign up</Link>
+            </Text>
+          </Paper>
         </div>
       </div>
     </div>

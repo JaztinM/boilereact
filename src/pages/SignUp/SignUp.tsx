@@ -178,15 +178,7 @@ export function SignUp() {
         <Button
             fullWidth
             mt="md"
-            style={{
-                borderRadius: '25px',
-                height: '44px',
-                background: isEnabled ? primaryColor : disabledBgColor,
-                color: isEnabled ? (isDark ? '#000' : '#fff') : disabledTextColor,
-                textTransform: 'lowercase',
-                cursor: isEnabled ? 'pointer' : 'not-allowed',
-                transition: 'all 0.2s ease'
-            }}
+            className={`${classes.themedButton} ${isEnabled ? classes.enabledButton : classes.disabledButton}`}
             onClick={onClick}
             disabled={!isEnabled}
         >
@@ -201,43 +193,33 @@ export function SignUp() {
                 return (
                     <>
                         <div className={classes.formGroup}>
-                            <Text size="xs" c={dimmedTextColor} mb={5}>
+                            <Text className={classes.stepText} mb={5}>
                                 email address
                             </Text>
                             <TextInput
                                 name="email"
+                                placeholder="john@email.com"
                                 value={userInfo.email}
                                 onChange={handleChange}
                                 className={classes.input}
                                 classNames={{ input: classes.inputElement }}
                                 variant="unstyled"
-                                styles={{
-                                    input: {
-                                        backgroundColor: inputBgColor,
-                                        color: textColor
-                                    }
-                                }}
                                 required
                             />
                         </div>
 
                         <div className={classes.formGroup}>
-                            <Text size="xs" c={dimmedTextColor} mb={5}>
+                            <Text className={classes.stepText} mb={5}>
                                 password
                             </Text>
                             <PasswordInput
                                 name="password"
+                                placeholder="*********"
                                 value={userInfo.password}
                                 onChange={handleChange}
                                 className={classes.input}
                                 classNames={{ input: classes.inputElement }}
                                 variant="unstyled"
-                                styles={{
-                                    input: {
-                                        backgroundColor: inputBgColor,
-                                        color: textColor
-                                    }
-                                }}
                                 required
                             />
                         </div>
@@ -247,21 +229,14 @@ export function SignUp() {
                 return (
                     <>
                         <div className={classes.formGroup}>
-                            <Text size="xs" c={dimmedTextColor} mb={5}>
+                            <Text className={classes.stepText} mb={5}>
                                 phone number
                             </Text>
                             <PhoneInput
                                 defaultCountry="ph"
                                 value={userInfo.phone}
                                 onChange={(phone) => setUserInfo(prev => ({ ...prev, phone }))}
-                                inputStyle={{
-                                    width: '100%',
-                                    height: '36px',
-                                    fontSize: '14px',
-                                    backgroundColor: inputBgColor,
-                                    color: textColor,
-                                    borderColor: borderColor,
-                                }}
+                                className={classes.input}
                             />
                         </div>
 
@@ -280,49 +255,29 @@ export function SignUp() {
             case 3:
                 return (
                     <div className={classes.formGroup}>
-                        <Text size="xs" c={dimmedTextColor} mb={5}>
+                        <Text className={classes.stepText} mb={5}>
                             verification code
                         </Text>
-                        <Text size="xs" c={dimmedTextColor} mb={15}>
+                        <Text className={classes.stepText} mb={15}>
                             Enter the 6-digit code sent to your phone
                         </Text>
-                        <div style={{
-                            padding: '20px',
-                            backgroundColor: isDark ? '#282828' : '#f5f5f5',
-                            borderRadius: '8px',
-                            marginBottom: '15px'
-                        }}>
+                        <div className={classes.pinInputContainer}>
                             <PinInput
                                 length={6}
                                 value={otp}
                                 onChange={handleOtpChange}
-                                style={{
-                                    justifyContent: 'space-between',
-                                    width: '100%',
-                                    gap: '8px'
-                                }}
-                                styles={{
-                                    input: {
-                                        border: `1px solid ${borderColor}`,
-                                        borderRadius: '4px',
-                                        width: '42px',
-                                        height: '48px',
-                                        fontSize: '20px',
-                                        fontWeight: 'bold',
-                                        backgroundColor: inputBgColor,
-                                        color: textColor
-                                    }
-                                }}
+                                className={classes.pinInput}
+                                classNames={{ input: classes.pinInputField }}
                                 type="number"
                                 inputMode="numeric"
                                 autoFocus={true}
                                 placeholder="0"
-                                size="lg"
+                                size="md"
                             />
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'center' }}>
                             <Anchor size="xs" onClick={() => handleSendOtp()}>
-                                Resend code
+                                {currentStep === 3 ? 'resend code' : 'send code'}
                             </Anchor>
                         </div>
                     </div>
@@ -330,15 +285,15 @@ export function SignUp() {
             case 4:
                 return (
                     <div className={classes.formGroup}>
-                        <Text size="xl" fw={700} mb={10} c={textColor}>
+                        <Text className={classes.stepTitle} mb={10}>
                             what name shall we call you?
                         </Text>
-                        <Text size="sm" c={dimmedTextColor} mb={20}>
+                        <Text className={classes.stepSubtitle} mb={20}>
                             generate your alias name. we will not generate the same alias name as your real name.
                         </Text>
 
                         <div className={classes.formGroup} style={{ marginBottom: '20px' }}>
-                            <Text size="xs" c={dimmedTextColor} mb={5}>
+                            <Text className={classes.stepText} mb={5}>
                                 custom username
                             </Text>
                             <TextInput
@@ -349,16 +304,10 @@ export function SignUp() {
                                 classNames={{ input: classes.inputElement }}
                                 variant="unstyled"
                                 placeholder="enter your own username"
-                                styles={{
-                                    input: {
-                                        backgroundColor: inputBgColor,
-                                        color: textColor
-                                    }
-                                }}
                             />
                         </div>
 
-                        <Text size="xs" c={dimmedTextColor} mb={10}>
+                        <Text className={classes.stepText} mb={10}>
                             or choose from these options:
                         </Text>
 
@@ -369,21 +318,6 @@ export function SignUp() {
                                     variant={userInfo.username === name ? "filled" : "outline"}
                                     onClick={() => handleUsernameSelect(name)}
                                     className={classes.usernameOption}
-                                    styles={{
-                                        root: {
-                                            backgroundColor: userInfo.username === name ?
-                                                (isDark ? '#3f3f3f' : '#f0f0f0') :
-                                                'transparent',
-                                            border: userInfo.username === name ?
-                                                `1px solid ${primaryColor}` :
-                                                `1px solid ${isDark ? '#444' : '#e0e0e0'}`,
-                                            color: textColor,
-                                            borderRadius: '30px',
-                                            padding: '10px 20px',
-                                            marginBottom: '10px',
-                                            transition: 'all 0.2s ease'
-                                        }
-                                    }}
                                 >
                                     {name}
                                 </Button>
@@ -394,15 +328,7 @@ export function SignUp() {
                             variant="outline"
                             onClick={handleRandomUsername}
                             fullWidth
-                            style={{
-                                borderRadius: '30px',
-                                marginTop: '15px',
-                                marginBottom: '30px',
-                                padding: '10px',
-                                backgroundColor: isDark ? '#2c2c2c' : '#e0e0e0',
-                                color: isDark ? '#aaa' : '#555',
-                                border: 'none'
-                            }}
+                            className={classes.usernameOption}
                         >
                             randomize
                         </Button>
@@ -410,12 +336,12 @@ export function SignUp() {
                 )
             case 5:
                 return (
-                    <div className={classes.formGroup} style={{ textAlign: 'center', padding: '20px 0' }}>
-                        <Text size="md" fw={500} ta="center" c={textColor}>
-                            All steps completed!
+                    <div className={classes.formGroup} >
+                        <Text className={classes.stepTitle} ta="left" mt={40}>
+                            congratulations!🎉
                         </Text>
-                        <Text size="sm" c={dimmedTextColor} ta="center" mt={10}>
-                            Account creation would continue with additional steps in a real implementation.
+                        <Text className={classes.stepSubtitle} ta="left" mt={10}>
+                            account creation would continue with additional steps in a real implementation.
                         </Text>
                     </div>
                 )
@@ -448,8 +374,8 @@ export function SignUp() {
                             <path d="M8.9149 9.09467C10.8358 8.41018 12.3715 6.94279 13.1448 5.06352L13.6814 7.8914C14.0159 9.654 13.0742 11.4109 11.4212 12.1082L6.55219 14.1622C4.90935 14.8552 3.55262 16.0819 2.69761 17.6384L3.26615 13.3081C3.45219 11.8911 4.41627 10.6977 5.7625 10.218L8.9149 9.09467Z" fill={isDark ? "#e0e0e0" : "#1A1A1A"} stroke={isDark ? "#e0e0e0" : "#1A1A1A"} stroke-width="0.129032" />
                             <rect x="5.84766" width="5.16129" height="5.16129" rx="2.58065" fill={isDark ? "#e0e0e0" : "#1A1A1A"} />
                         </svg>
-                        <h1 className={classes.title} style={{ color: isDark ? '#e0e0e0' : '#1A1A1A' }}>LightHouse</h1>
-                        <p className={classes.subtitle} style={{ color: isDark ? '#aaa' : 'inherit' }}>
+                        <h1 className={classes.title}>LightHouse</h1>
+                        <p className={classes.subtitle}>
                             A space for everyone in every place
                         </p>
                     </div>
@@ -457,13 +383,13 @@ export function SignUp() {
 
                 <div className={classes.rightSection}>
                     <div className={classes.formContainer}>
-                        <Text size="xs" c={dimmedTextColor} mb={10}>
+                        <Text className={classes.stepText} mb={10}>
                             step {currentStep} of 5
                         </Text>
-                        <Text size="lg" fw={700} mb={5} c={textColor}>
+                        <Text className={classes.stepTitle} mb={5}>
                             create an account
                         </Text>
-                        <Text size="sm" mb={15} c={textColor}>
+                        <Text className={classes.stepSubtitle} mb={15}>
                             {currentStep === 1 ? 'sign up with email' :
                                 currentStep === 2 ? 'add your phone' :
                                     currentStep === 3 ? 'verify your phone' :
@@ -472,11 +398,11 @@ export function SignUp() {
                         </Text>
 
                         {currentStep === 1 && (
-                            <div style={{ display: 'flex', gap: '5px', marginBottom: '20px' }}>
-                                <Text size="xs" c={dimmedTextColor}>
-                                    already have an account?
+                            <div className={classes.loginContainer} style={{ marginBottom: '20px' }}>
+                                <Text className={classes.stepText} component="span">
+                                    already have an account?{' '}
                                 </Text>
-                                <Anchor component={Link} to="/login" size="xs">
+                                <Anchor component={Link} to="/login" className={classes.signUpLink}>
                                     sign in
                                 </Anchor>
                             </div>
@@ -502,15 +428,7 @@ export function SignUp() {
                                 <Button
                                     fullWidth
                                     mt="md"
-                                    style={{
-                                        borderRadius: '25px',
-                                        height: '44px',
-                                        background: fieldsComplete ? primaryColor : disabledBgColor,
-                                        color: fieldsComplete ? (isDark ? '#000' : '#fff') : disabledTextColor,
-                                        textTransform: 'lowercase',
-                                        cursor: fieldsComplete ? 'pointer' : 'not-allowed',
-                                        transition: 'all 0.2s ease'
-                                    }}
+                                    className={`${classes.themedButton} ${fieldsComplete ? classes.enabledButton : classes.disabledButton}`}
                                     onClick={() => {
                                         if (fieldsComplete) {
                                             handleNextStep()
@@ -531,7 +449,6 @@ export function SignUp() {
                                     labelPosition="center"
                                     my="md"
                                     className={classes.divider}
-                                    color={isDark ? "dark" : "gray"}
                                 />
 
                                 <div className={classes.oauthButtons}>
@@ -546,16 +463,6 @@ export function SignUp() {
                                             </svg>
                                         }
                                         className={classes.oauthButton}
-                                        style={{
-                                            borderRadius: '25px',
-                                            textTransform: 'lowercase',
-                                            height: '44px',
-                                            marginBottom: '10px',
-                                            borderColor: isDark ? '#444' : '#e0e0e0',
-                                            color: textColor,
-                                            backgroundColor: isDark ? '#2c2c2c' : '#fff'
-                                        }}
-                                        variant="default"
                                     >
                                         continue with Google
                                     </Button>
@@ -568,15 +475,6 @@ export function SignUp() {
                                             </svg>
                                         }
                                         className={classes.oauthButton}
-                                        style={{
-                                            borderRadius: '25px',
-                                            textTransform: 'lowercase',
-                                            height: '44px',
-                                            borderColor: isDark ? '#444' : '#e0e0e0',
-                                            color: textColor,
-                                            backgroundColor: isDark ? '#2c2c2c' : '#fff'
-                                        }}
-                                        variant="default"
                                     >
                                         continue with Apple
                                     </Button>

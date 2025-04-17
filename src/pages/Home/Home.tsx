@@ -5,8 +5,9 @@ import { useQuery } from '@apollo/client'
 import { useShape } from '@electric-sql/react'
 import {
   Anchor, Box, Button, Container, Flex, Image, Input, Text, Title,
-  Avatar, TextInput, Group, Stack
+  Avatar, TextInput, Group, Stack, Drawer, Burger, useMantineColorScheme, rem
 } from '@mantine/core'
+import { useDisclosure, useViewportSize } from '@mantine/hooks'
 import { IconSearch } from '@tabler/icons-react'
 import { S } from 'vitest/dist/reporters-yx5ZTtEV.js'
 
@@ -32,6 +33,25 @@ const Home: FC = (): JSX.Element => {
   })
 
   const { data, loading, error } = useQuery(GET_TOKENS)
+  const { width } = useViewportSize();
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+
+  const showHeader = width <= 1100;
+  const showRightSidebar = width > 1100;
+  const showLeftSidebar = width > 900;
+  const showBurger = width <= 900;
+
+  // Custom Header component that has access to our drawer state
+  const CustomHeader = () => {
+    return (
+      <Header
+        showTrending={width <= 1100 && width > 900}
+        drawerOpened={drawerOpened}
+        toggleDrawer={toggleDrawer}
+      />
+    );
+  };
 
   const { data: items } = useShape<Item>({
     url: `${baseUrl}/v1/shape`,
@@ -144,18 +164,85 @@ const Home: FC = (): JSX.Element => {
   ];
 
   return (
-    <Container className={classes.container} fluid>
-      <div className={classes.sidebar}>
+    <>
+
+
+      <Drawer
+        opened={drawerOpened}
+        onClose={closeDrawer}
+        title={
+          <div className={classes.drawerHeader}>
+            <svg width="22" height="38" viewBox="0 0 29 35" fill="none" xmlns="http://www.w3.org/2000/svg" className={classes.drawerLogo}>
+              <path d="M11.6759 28.1842C13.5006 27.486 15.0641 26.2427 16.1551 24.6254L16.7063 29.0354C16.9319 30.8402 15.8491 32.5525 14.1217 33.1223L4.00216 36.4607C2.36397 37.0011 0.983011 38.119 0.112825 39.5995L0.795944 34.4761C0.980285 33.0935 1.90602 31.9225 3.20871 31.4241L11.6759 28.1842Z" fill="currentColor" stroke="currentColor" strokeWidth="0.129032" />
+              <path d="M10.9406 17.7976C12.5791 17.1539 13.913 15.9185 14.6812 14.3403L15.2578 18.0034C15.5373 19.7787 14.5369 21.5077 12.8585 22.1502L4.84106 25.2192C3.38744 25.7756 2.20951 26.8677 1.54271 28.2614L2.16061 23.3756C2.33524 21.9947 3.24961 20.8193 4.54505 20.3103L10.9406 17.7976Z" fill="currentColor" stroke="currentColor" strokeWidth="0.129032" />
+              <path d="M8.9149 9.09467C10.8358 8.41018 12.3715 6.94279 13.1448 5.06352L13.6814 7.8914C14.0159 9.654 13.0742 11.4109 11.4212 12.1082L6.55219 14.1622C4.90935 14.8552 3.55262 16.0819 2.69761 17.6384L3.26615 13.3081C3.45219 11.8911 4.41627 10.6977 5.7625 10.218L8.9149 9.09467Z" fill="currentColor" stroke="currentColor" strokeWidth="0.129032" />
+              <rect x="5.84766" width="5.16129" height="5.16129" rx="2.58065" fill="currentColor" />
+            </svg>
+            <Text className={classes.drawerTitleText}>LightHouse</Text>
+          </div>
+        }
+        size="sm"
+        classNames={{
+          body: classes.drawerBody,
+          header: classes.drawerHeaderContainer,
+          content: classes.drawerContent,
+          inner: classes.drawerInner
+        }}
+        withCloseButton
+      >
         <Navbar />
-      </div>
-      <div className={classes.post_container}>
-        <PostCreator />
-        {samplePosts.map((post, index) => (
-          <Posts key={index} posts={post} />
-        ))}
-      </div>
-      <RightSidebar />
-    </Container>
+        {width <= 900 && (
+          <div className={classes.mobileSearchSection}>
+            <TextInput
+              placeholder="Search"
+              leftSection={<IconSearch size={16} />}
+              size="md"
+              radius="md"
+              mb="md"
+            />
+            <div className={classes.trendingSection}>
+              <Text className={classes.sectionTitle}>Trending Tags</Text>
+              <div className={classes.trendingItem}>
+                <Text className={classes.trendingTag}>#ReactJS</Text>
+                <Text className={classes.trendingMeta}>1.2K posts</Text>
+              </div>
+              <div className={classes.trendingItem}>
+                <Text className={classes.trendingTag}>#WebDevelopment</Text>
+                <Text className={classes.trendingMeta}>845 posts</Text>
+              </div>
+              <div className={classes.trendingItem}>
+                <Text className={classes.trendingTag}>#JavaScript</Text>
+                <Text className={classes.trendingMeta}>2.5K posts</Text>
+              </div>
+              <div className={classes.trendingItem}>
+                <Text className={classes.trendingTag}>#TechNews</Text>
+                <Text className={classes.trendingMeta}>620 posts</Text>
+              </div>
+            </div>
+          </div>
+        )}
+      </Drawer>
+
+      <Container className={classes.container} fluid>
+        {showHeader && <CustomHeader />}
+
+        <div className={classes.content_container}>
+          {showLeftSidebar && (
+            <div className={classes.sidebar}>
+              <Navbar />
+            </div>
+          )}
+          <div className={classes.post_container}>
+            <PostCreator />
+            {samplePosts.map((post, index) => (
+              <Posts key={index} posts={post} />
+            ))}
+          </div>
+          {showRightSidebar && <RightSidebar />}
+        </div>
+
+      </Container>
+    </>
   )
 }
 

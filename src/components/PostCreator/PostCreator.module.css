@@ -5,7 +5,9 @@
     border-radius: 0 0 15px 15px;
     background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
     /*box-shadow: 0 2px 8px light-dark(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.25));*/
-    border: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+    border-width: 0px 1px 1px 1px;
+    border-style: solid;
+    border-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
 }
 
 .inputContainer {
@@ -157,11 +159,9 @@
     color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-3)) !important;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .postCreator {
-        width: 95%;
-        border-radius: 6px;
-        padding: 12px;
+        display: none;
     }
 
     .actionButtonsContainer {
