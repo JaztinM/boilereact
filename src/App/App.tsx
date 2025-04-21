@@ -24,7 +24,7 @@ const App = () => {
   return (
     <ErrorBoundaryProvider>
       <ThemeProvider>
-        <GoogleOAuthProvider clientId="451238265730-j7r1a8hd3jqvhacpsij2me1q9ugq40hk.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId="">
           <NotificationProvider>
             <ApolloProvider client={client}>
               <QueryProvider>
