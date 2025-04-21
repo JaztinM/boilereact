@@ -16,7 +16,8 @@
   display: flex;
   flex-direction: row;
   gap: 2rem;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: space-between;
   padding: 0rem 1rem 1rem 0;
 
   @media screen and (max-width: 768px) {
@@ -36,10 +37,10 @@
 
 .sidebar {
   position: sticky;
-  top: 0;
+  top: 56px;
   height: 100vh;
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
 }
 
 .post_container {
@@ -109,35 +110,115 @@
   background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
 }
 
-.mobileSearchSection {
-  margin-top: 1rem;
-  border-top: 1px solid var(--mantine-color-dark-7);
-  padding: 1rem;
-  color: var(--mantine-color-white);
+.drawerContent {
+  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
+  height: 100%;
 }
 
-.sectionTitle {
-  font-size: 1.1rem;
-  font-weight: 500;
-  margin-bottom: 0.75rem;
-  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-white));
+.drawerHeaderContainer {
+  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
+  border-bottom: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+  padding: 16px;
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.drawerTitleText {
+  font-size: 20px;
+  font-weight: 600;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-0));
+}
+
+.drawerLogo {
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-0));
+}
+
+.mobileSearchSection {
+  padding: 16px;
+  border-bottom: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+}
+
+.trendingSection {
+  margin-top: var(--mantine-spacing-md);
 }
 
 .trendingItem {
   padding: 0.75rem 0;
-  border-bottom: 1px solid light-dark(var(--mantine-color-gray-3), rgba(225, 241, 255, 0.1));
+  border-bottom: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-6));
 }
 
 .trendingTag {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin-bottom: 0.25rem;
-  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-white));
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-0));
 }
 
 .trendingMeta {
-  color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-gray-7));
-  font-size: 0.8rem;
+  color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-gray-5));
+  font-size: 0.9rem;
+}
+
+.drawerNavSection {
+  padding: 0.5rem;
+  border-bottom: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+
+}
+
+.drawerNavGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.navButton {
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-0));
+  border-radius: 50%;
+  transition: background-color 200ms ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.navButton:hover {
+  background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-4));
+}
+
+.drawerLink {
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  transition: background-color 200ms ease;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-0));
+  display: flex;
+  align-items: center;
+}
+
+.drawerLink:hover {
+  background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+}
+
+.drawerLink svg {
+  color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-gray-5));
+  margin-right: 12px;
+}
+
+.drawerLink:hover svg {
+  color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-gray-0));
+}
+
+/* Update the Group component styles within drawerLink */
+.drawerLink>div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
 }
 
 /* Responsive adjustments */
@@ -145,46 +226,10 @@
 
 /* Keep the existing styles below */
 
-
-
-
-.drawerContent {
-  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
-  color: var(--mantine-color-white);
-}
-
-.drawerInner {}
-
-.drawerHeaderContainer {
-  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
-  border-bottom: 1px solid var(--mantine-color-dark-7);
-  padding: 0.5rem 1rem;
-}
-
-.drawerHeader {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-white));
-}
-
-.drawerTitleText {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-white));
-}
-
-.drawerLogo {
-  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-white));
-}
-
-.drawerBody {
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
-  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-white));
+@media (min-width: 1921px) {
+  .content_container {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 1100px) {
@@ -215,4 +260,23 @@
   .post_container {
     margin: 0 auto;
   }
+}
+
+.postButton {
+  background: linear-gradient(45deg, #4c6ef5, #228be6) !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 500 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.postButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+.postButton:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
 }

@@ -4,16 +4,24 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { useShape } from '@electric-sql/react'
 import {
-  Anchor, Box, Button, Container, Flex, Image, Input, Text, Title,
-  Avatar, TextInput, Group, Stack, Drawer, Burger, useMantineColorScheme, rem
+  Button, Container, Text,
+  Avatar, TextInput, Group, Stack, Drawer, useMantineColorScheme, UnstyledButton
 } from '@mantine/core'
 import { useDisclosure, useViewportSize } from '@mantine/hooks'
-import { IconSearch } from '@tabler/icons-react'
-import { S } from 'vitest/dist/reporters-yx5ZTtEV.js'
+import {
+  IconSearch,
+  IconMessage2,
+  IconBell,
+  IconSun,
+  IconMoon,
+  IconHome2,
+  IconUsers,
+  IconLogout,
+  IconPencilPlus
+} from '@tabler/icons-react'
 
-import { CarouselCard, PostCreator, RightSidebar } from '@/components'
+import { PostCreator, RightSidebar } from '@/components'
 import { Header, Navbar } from '@/components'
-import { get } from '@/libs'
 import { axios } from '@/libs'
 import { GET_TOKENS } from '@/pgSchemas'
 import classes from './Home.module.css'
@@ -36,6 +44,7 @@ const Home: FC = (): JSX.Element => {
   const { width } = useViewportSize();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const navigate = useNavigate();
 
   const showHeader = width <= 1100;
   const showRightSidebar = width > 1100;
@@ -165,8 +174,6 @@ const Home: FC = (): JSX.Element => {
 
   return (
     <>
-
-
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
@@ -190,41 +197,96 @@ const Home: FC = (): JSX.Element => {
         }}
         withCloseButton
       >
-        <Navbar />
-        {width <= 900 && (
-          <div className={classes.mobileSearchSection}>
-            <TextInput
-              placeholder="Search"
-              leftSection={<IconSearch size={16} />}
-              size="md"
-              radius="md"
-              mb="md"
-            />
-            <div className={classes.trendingSection}>
-              <Text className={classes.sectionTitle}>Trending Tags</Text>
-              <div className={classes.trendingItem}>
-                <Text className={classes.trendingTag}>#ReactJS</Text>
-                <Text className={classes.trendingMeta}>1.2K posts</Text>
-              </div>
-              <div className={classes.trendingItem}>
-                <Text className={classes.trendingTag}>#WebDevelopment</Text>
-                <Text className={classes.trendingMeta}>845 posts</Text>
-              </div>
-              <div className={classes.trendingItem}>
-                <Text className={classes.trendingTag}>#JavaScript</Text>
-                <Text className={classes.trendingMeta}>2.5K posts</Text>
-              </div>
-              <div className={classes.trendingItem}>
-                <Text className={classes.trendingTag}>#TechNews</Text>
-                <Text className={classes.trendingMeta}>620 posts</Text>
-              </div>
-            </div>
-          </div>
-        )}
+        <div className={classes.mobileSearchSection}>
+          <TextInput
+            placeholder="Search"
+            leftSection={<IconSearch size={16} />}
+            size="md"
+            radius="md"
+          />
+        </div>
+
+        <div className={classes.drawerNavSection}>
+          <Group className={classes.drawerNavGroup} p="sm">
+            <UnstyledButton className={classes.navButton} onClick={() => navigate('/profile')}>
+              <Avatar size="md" radius="xl" src="https://placehold.co/40x40/007bff/ffffff?text=J" />
+            </UnstyledButton>
+            <UnstyledButton className={classes.navButton} onClick={() => navigate('/messages')}>
+              <IconMessage2 size={24} stroke={1.5} />
+            </UnstyledButton>
+            <UnstyledButton className={classes.navButton} onClick={() => navigate('/notifications')}>
+              <IconBell size={24} stroke={1.5} />
+            </UnstyledButton>
+            <UnstyledButton className={classes.navButton} onClick={toggleColorScheme}>
+              {colorScheme === 'dark' ? <IconSun size={24} stroke={1.5} /> : <IconMoon size={24} stroke={1.5} />}
+            </UnstyledButton>
+          </Group>
+        </div>
+
+        <div className={classes.drawerContent}>
+          <Stack gap="md" style={{ height: '100%', justifyContent: 'space-between' }}>
+            <Stack gap="sm" p="sm">
+              <UnstyledButton className={classes.drawerLink} onClick={() => navigate('/')}>
+                <Group>
+                  <IconHome2 size={24} stroke={1.5} />
+                  <Text size="md">Home</Text>
+                </Group>
+              </UnstyledButton>
+              <UnstyledButton className={classes.drawerLink} onClick={() => navigate('/search')}>
+                <Group>
+                  <IconSearch size={24} stroke={1.5} />
+                  <Text size="md">Search</Text>
+                </Group>
+              </UnstyledButton>
+              <UnstyledButton className={classes.drawerLink} onClick={() => navigate('/notifications')}>
+                <Group>
+                  <IconBell size={24} stroke={1.5} />
+                  <Text size="md">Notifications</Text>
+                </Group>
+              </UnstyledButton>
+              <UnstyledButton className={classes.drawerLink} onClick={() => navigate('/groups')}>
+                <Group>
+                  <IconUsers size={24} stroke={1.5} />
+                  <Text size="md">Groups</Text>
+                </Group>
+              </UnstyledButton>
+            </Stack>
+
+            <Stack gap="md" p="sm">
+              <Button
+                fullWidth
+                size="md"
+                radius="xl"
+                className={classes.postButton}
+                leftSection={<IconPencilPlus size={20} />}
+              >
+                post
+              </Button>
+              <UnstyledButton className={classes.drawerLink} onClick={toggleColorScheme}>
+                <Group>
+                  {colorScheme === 'dark' ? <IconSun size={24} stroke={1.5} /> : <IconMoon size={24} stroke={1.5} />}
+                  <Text size="md">{colorScheme === 'dark' ? 'Light mode' : 'Dark mode'}</Text>
+                </Group>
+              </UnstyledButton>
+              <UnstyledButton
+                className={classes.drawerLink}
+                onClick={() => {
+                  // Add your logout logic here
+                  navigate('/login')
+                }}
+              >
+                <Group>
+                  <IconLogout size={24} stroke={1.5} />
+                  <Text size="md">Logout</Text>
+                </Group>
+              </UnstyledButton>
+            </Stack>
+          </Stack>
+        </div>
       </Drawer>
 
       <Container className={classes.container} fluid>
-        {showHeader && <CustomHeader />}
+        {<CustomHeader />}
 
         <div className={classes.content_container}>
           {showLeftSidebar && (

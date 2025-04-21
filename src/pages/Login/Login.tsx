@@ -56,6 +56,11 @@ export function Login() {
 
   return (
     <div className={classes.wrapper}>
+      <div className={classes.waveContainer}>
+        <div className={classes.wave1}></div>
+        <div className={classes.wave2}></div>
+        <div className={classes.wave3}></div>
+      </div>
 
       <div className={classes.container}>
         <div className={classes.leftSection}>

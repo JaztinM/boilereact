@@ -1,127 +1,155 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-
-import { Center, Stack, Tooltip, UnstyledButton, Text, Button } from '@mantine/core'
-import { useMantineColorScheme } from '@mantine/core'
-import {
-  IconHome2,
-  IconSearch,
-  IconBell,
-  IconMessageCircle,
-  IconUsers,
-  IconCompass,
-  IconUser,
-  IconTrophy,
-  IconSettings,
-  IconLogout,
-  IconPencilPlus,
-  IconSun,
-  IconMoon,
-} from '@tabler/icons-react'
-
+import { useNavigate, useLocation } from 'react-router-dom'
+import { Stack, Avatar, Text, Button, Card, Image, Divider } from '@mantine/core'
 import classes from './NavbarMinimal.module.css'
 
-interface NavbarLinkProps {
-  icon: typeof IconHome2
-  label: string
-  active?: boolean
-  onClick?: () => void
+interface PersonNearbyProps {
+  name: string;
+  message: string;
+  avatarUrl?: string;
+  distance: string;
+  isOnline: boolean;
+  mutualInterests?: string[];
+  lastActive?: string;
 }
 
-function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
+function PersonNearby({
+  name,
+  message,
+  avatarUrl,
+  distance,
+  isOnline,
+  mutualInterests,
+  lastActive
+}: PersonNearbyProps) {
   return (
-    <UnstyledButton onClick={onClick} className={classes.link} data-active={active || undefined}>
-      <Icon size={20} stroke={1.5} /> <p>{label}</p>
-    </UnstyledButton>
-  )
+    <div className={classes.personCard}>
+      <div className={classes.avatarWrapper}>
+        <Avatar src={avatarUrl} radius="xl" size="md" color="blue">
+          {name.charAt(0)}
+        </Avatar>
+        {isOnline && <div className={classes.onlineIndicator} />}
+      </div>
+      <div className={classes.personInfo}>
+        <div className={classes.personHeader}>
+          <Text size="sm" fw={500}>{name}</Text>
+          <Text size="xs" c="dimmed">{distance}</Text>
+        </div>
+        <Text size="xs" c="dimmed" lineClamp={1}>{message}</Text>
+        {mutualInterests && mutualInterests.length > 0 && (
+          <Text size="xs" c="blue.5" mt={4}>
+            {mutualInterests.length} mutual interests
+          </Text>
+        )}
+        {!isOnline && lastActive && (
+          <Text size="xs" c="dimmed.5" mt={4}>
+            Active {lastActive}
+          </Text>
+        )}
+      </div>
+    </div>
+  );
 }
 
-const navbarItems = [
-  { icon: IconHome2, label: 'home' },
-  { icon: IconSearch, label: 'search' },
-  { icon: IconBell, label: 'notifications' },
-  { icon: IconMessageCircle, label: 'messages' },
-  { icon: IconUsers, label: 'groups' },
-  { icon: IconCompass, label: 'explore' },
-  { icon: IconUser, label: 'profile' },
-  { icon: IconTrophy, label: 'leaderboard' },
+interface CommunityItemProps {
+  name: string;
+  memberCount: number;
+  description: string;
+}
 
-]
-
-const bottomItems = [
-  { icon: IconUser, label: 'profile' },
-  { icon: IconSettings, label: 'settings' },
-  { icon: IconLogout, label: 'logout' },
-]
+function CommunityItem({ name, memberCount, description }: CommunityItemProps) {
+  return (
+    <div className={classes.communityItem}>
+      <div className={classes.communityIcon} />
+      <div className={classes.communityInfo}>
+        <Text size="sm" fw={500}>{name}</Text>
+        <Text size="xs" c="dimmed">{memberCount} members</Text>
+        <Text size="xs" mt={4}>{description}</Text>
+      </div>
+    </div>
+  );
+}
 
 export function Navbar() {
-  const [active, setActive] = useState(0)
-  const navigate = useNavigate()
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme()
-
-  const links = navbarItems.map((link, index) => (
-    <NavbarLink
-      {...link}
-      key={link.label}
-      active={index === active}
-      onClick={() => {
-        setActive(index)
-        if (link.label === 'logout') {
-          navigate('/login')
-        } else {
-          navigate(`/${link.label}`)
-        }
-      }}
-    />
-  ))
-
-  const bottomLinks = bottomItems.map((link) => (
-    <NavbarLink
-      {...link}
-      key={link.label}
-      onClick={() => {
-        if (link.label === 'logout') {
-          navigate('/login')
-        } else {
-          navigate(`/${link.label}`)
-        }
-      }}
-    />
-  ))
-
   return (
     <nav className={classes.navbar}>
-      <div className={classes.logo}>
-        <svg width="22" height="38" viewBox="0 0 29 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M11.6759 28.1842C13.5006 27.486 15.0641 26.2427 16.1551 24.6254L16.7063 29.0354C16.9319 30.8402 15.8491 32.5525 14.1217 33.1223L4.00216 36.4607C2.36397 37.0011 0.983011 38.119 0.112825 39.5995L0.795944 34.4761C0.980285 33.0935 1.90602 31.9225 3.20871 31.4241L11.6759 28.1842Z" fill="currentColor" stroke="currentColor" stroke-width="0.129032" />
-          <path d="M10.9406 17.7976C12.5791 17.1539 13.913 15.9185 14.6812 14.3403L15.2578 18.0034C15.5373 19.7787 14.5369 21.5077 12.8585 22.1502L4.84106 25.2192C3.38744 25.7756 2.20951 26.8677 1.54271 28.2614L2.16061 23.3756C2.33524 21.9947 3.24961 20.8193 4.54505 20.3103L10.9406 17.7976Z" fill="currentColor" stroke="currentColor" stroke-width="0.129032" />
-          <path d="M8.9149 9.09467C10.8358 8.41018 12.3715 6.94279 13.1448 5.06352L13.6814 7.8914C14.0159 9.654 13.0742 11.4109 11.4212 12.1082L6.55219 14.1622C4.90935 14.8552 3.55262 16.0819 2.69761 17.6384L3.26615 13.3081C3.45219 11.8911 4.41627 10.6977 5.7625 10.218L8.9149 9.09467Z" fill="currentColor" stroke="currentColor" stroke-width="0.129032" />
-          <rect x="5.84766" width="5.16129" height="5.16129" rx="2.58065" fill="currentColor" />
-        </svg>
-      </div>
+      <div className={classes.scrollWrapper}>
+        <div className={classes.scrollContainer}>
+          <div className={classes.section}>
+            <Text className={classes.sectionTitle}>people near me</Text>
+            <Text c="dimmed" mb="md">Looking for someone near your place?</Text>
 
-      <div className={classes.navbarMain}>
-        <Stack justify="center" gap={8}>
-          {links}
-        </Stack>
-        <UnstyledButton onClick={() => toggleColorScheme()} className={classes.themeToggleBtn}>
-          {colorScheme === 'dark' ? <IconSun size={20} stroke={1.5} /> : <IconMoon size={20} stroke={1.5} />} <p>{colorScheme === 'dark' ? 'Light mode' : 'Dark mode'}</p>
-        </UnstyledButton>
-      </div>
+            <Stack gap="sm">
+              <PersonNearby
+                name="David Zaleski"
+                message="hi, looking forward to meeting"
+                distance="2.5 km away"
+                isOnline={true}
+                mutualInterests={["Skateboarding", "Photography"]}
+              />
+              <PersonNearby
+                name="Ann Tubato"
+                message="Wanna hang out?"
+                distance="3.8 km away"
+                isOnline={false}
+                lastActive="2h ago"
+                mutualInterests={["Basketball"]}
+              />
+              <PersonNearby
+                name="John Doe"
+                message="Hope we can be friends!"
+                distance="5 km away"
+                isOnline={true}
+                mutualInterests={["Volleyball", "Gaming"]}
+              />
+            </Stack>
 
-      <div className={classes.postButton}>
-        <Button
-          fullWidth
-          leftSection={<IconPencilPlus size={18} />}
-          className={classes.postBtn}
-        >
-          post
-        </Button>
-      </div>
+            <Button
+              variant="filled"
+              fullWidth
+              mt="md"
+              color="blue"
+              className={classes.viewMoreBtn}
+            >
+              View More
+            </Button>
+          </div>
 
-      <Stack justify="center" gap={8} className={classes.bottomLinks}>
-        {bottomLinks}
-      </Stack>
+          <Divider my="md" />
+
+          <div className={classes.section}>
+            <Text className={classes.sectionTitle}>communities</Text>
+            <Text c="dimmed" mb="md">Join groups of people that you can vibe with</Text>
+
+            <Stack gap="sm">
+              <CommunityItem
+                name="Skateboarding"
+                memberCount={23}
+                description="Join us and enjoy life as we please."
+              />
+              <CommunityItem
+                name="Basketball"
+                memberCount={45}
+                description="Join us and enjoy life as we please."
+              />
+              <CommunityItem
+                name="Volleyball"
+                memberCount={34}
+                description="Join us and enjoy life as we please."
+              />
+            </Stack>
+
+            <Button
+              variant="filled"
+              fullWidth
+              mt="md"
+              color="blue"
+              className={classes.viewMoreBtn}
+            >
+              View More
+            </Button>
+          </div>
+        </div>
+      </div>
     </nav>
-  )
+  );
 }

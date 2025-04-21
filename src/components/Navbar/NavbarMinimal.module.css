@@ -1,12 +1,58 @@
 .navbar {
   width: 100%;
   height: 100vh;
-  padding: var(--mantine-spacing-md);
-  display: flex;
-  flex-direction: column;
   background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-9));
+  position: sticky;
+  top: 0;
   transition: width 150ms ease;
   z-index: 10;
+  padding: 0rem;
+  padding-top: 0;
+  padding-bottom: 1rem;
+}
+
+.scrollWrapper {
+  position: relative;
+  height: 100%;
+  margin-right: -6px;
+  padding-right: 6px;
+}
+
+.scrollContainer {
+  height: 100%;
+  padding: var(--mantine-spacing-md);
+  overflow-y: scroll;
+
+  /* Hide scrollbar by default */
+  &::-webkit-scrollbar {
+    width: 6px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+  }
+
+  /* Show scrollbar on hover */
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(128, 128, 128, 0.5);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(128, 128, 128, 0.8);
+    }
+  }
+}
+
+.section {
+  margin-bottom: 32px;
 }
 
 /* Mobile styles when in a drawer */
@@ -35,63 +81,75 @@
 }
 
 .logo {
-  margin: 16px 0 24px;
+  margin: 24px 0 32px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  gap: 12px;
+  color: light-dark(var(--mantine-color-dark-6), var(--mantine-color-gray-0));
+}
+
+.logoText {
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.4;
   color: light-dark(var(--mantine-color-dark-6), var(--mantine-color-gray-0));
 }
 
 .navbarMain {
   flex: 1;
-  margin-top: 15px;
+  margin-top: 32px;
 }
 
-.link,
-.themeToggleBtn {
-  height: 40px;
-  border-radius: var(--mantine-radius-md);
+.sectionTitle {
+  text-transform: lowercase;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-3));
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.link {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 0;
-  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-4));
-  padding: var(--mantine-spacing-xs);
-  margin-bottom: 4px;
-  font-size: 15px;
-  gap: 1rem;
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-3));
+  padding: 12px var(--mantine-spacing-xs);
+  border-radius: var(--mantine-radius-md);
+  font-weight: 500;
 
   &:hover {
-    background-color: light-dark(var(--mantine-color-gray-1), #2A2A2A);
-  }
-
-  &>p {
-    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-gray-4));
-    font-size: 15px;
-    font-weight: 500;
+    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
   }
 
   &[data-active] {
 
     &,
     &:hover {
-      background-color: light-dark(var(--mantine-color-gray-1), #2A2A2A);
-      color: light-dark(var(--mantine-color-blue-filled), var(--mantine-color-blue-4));
+      background-color: var(--mantine-color-blue-light);
+      color: var(--mantine-color-blue-light-color);
     }
   }
 }
 
-.link>svg {
-  opacity: 1;
-  min-width: 20px;
+.linkIcon {
+  margin-right: var(--mantine-spacing-sm);
+  color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-gray-4));
 }
 
-.link>p,
-.themeToggleBtn>p {
-  overflow: hidden;
-  width: auto;
-  white-space: nowrap;
-  margin-left: 8px;
+.footer {
+  margin-top: auto;
+  padding-top: var(--mantine-spacing-md);
+  border-top: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-4));
+}
+
+.footerText {
+  font-size: 0.8rem;
+  color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-gray-5));
+  text-align: center;
+  line-height: 1.5;
 }
 
 .postButton {
@@ -110,8 +168,6 @@
   background-color: light-dark(var(--mantine-color-blue-7), #4a70c7);
 }
 
-
-
 .themeToggleBtn:hover {
   background-color: light-dark(var(--mantine-color-gray-1), #2A2A2A);
 }
@@ -127,8 +183,107 @@
   border-top: 1px solid light-dark(var(--mantine-color-gray-2), rgba(225, 241, 255, 0.1));
 }
 
-@media (max-width: 1100px) {
+.personCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px;
+  border-radius: var(--mantine-radius-md);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+
+  &:hover {
+    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  }
+}
+
+.avatarWrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.onlineIndicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--mantine-color-green-6);
+  border: 2px solid light-dark(var(--mantine-color-white), var(--mantine-color-dark-8));
+}
+
+.personInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.personHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.communityItem {
+  display: flex;
+  gap: 12px;
+  padding: 8px;
+  border-radius: var(--mantine-radius-md);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+
+  &:hover {
+    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+  }
+}
+
+.communityIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--mantine-radius-md);
+  background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+}
+
+.communityInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.sponsoredCard {
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 150ms ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .navbar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-6));
+  }
+
   .logo {
+    margin: 16px 0 24px;
+  }
+
+  .footer {
     display: none;
+  }
+}
+
+.viewMoreBtn {
+  background-color: var(--mantine-color-blue-6);
+  transition: background-color 150ms ease;
+
+  &:hover {
+    background-color: var(--mantine-color-blue-7);
   }
 }

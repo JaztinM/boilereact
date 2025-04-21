@@ -33,17 +33,6 @@ export function SignUp() {
     const { colorScheme } = useMantineColorScheme()
     const isDark = colorScheme === 'dark'
 
-    // Theme colors
-    const primaryColor = isDark ? '#BB86FC' : '#000'
-    const bgColor = isDark ? '#121212' : '#fff'
-    const disabledBgColor = isDark ? '#2c2c2c' : '#e0e0e0'
-    const disabledTextColor = isDark ? '#6c6c6c' : '#a0a0a0'
-    const inputBgColor = isDark ? '#2c2c2c' : '#fff'
-    const borderColor = isDark ? '#444' : '#ccc'
-    const cardBgColor = isDark ? '#1e1e1e' : '#fff'
-    const textColor = isDark ? '#e0e0e0' : '#000'
-    const dimmedTextColor = isDark ? '#aaa' : undefined
-
     const [userInfo, setUserInfo] = useState({
         email: '',
         password: '',
@@ -58,19 +47,6 @@ export function SignUp() {
     const [usernameOptions] = useState(['tony stark', 'bruce wayne', 'steve rogers'])
 
     // Add country codes data
-    const countryCodes = [
-        { value: '+1', label: '+1 (US/Canada)' },
-        { value: '+44', label: '+44 (UK)' },
-        { value: '+91', label: '+91 (India)' },
-        { value: '+61', label: '+61 (Australia)' },
-        { value: '+33', label: '+33 (France)' },
-        { value: '+49', label: '+49 (Germany)' },
-        { value: '+86', label: '+86 (China)' },
-        { value: '+81', label: '+81 (Japan)' },
-        { value: '+55', label: '+55 (Brazil)' },
-        { value: '+52', label: '+52 (Mexico)' },
-    ]
-
     // Get full phone number with country code
     const getFullPhoneNumber = () => {
         return `${countryCode}${userInfo.phone}`;
@@ -364,6 +340,13 @@ export function SignUp() {
 
     return (
         <div className={classes.wrapper} >
+            {/* Wave Background */}
+            <div className={classes.waveContainer}>
+                <div className={classes.wave1}></div>
+                <div className={classes.wave2}></div>
+                <div className={classes.wave3}></div>
+            </div>
+
             <div className={classes.container}>
                 <div className={classes.leftSection} >
                     <div className={classes.logoContainer}>
