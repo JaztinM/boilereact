@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, Suspense } from 'react'
 import {
   Outlet,
   Route,
@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom'
 
 import { Header, Navbar, Spinner } from '@/components'
-
+import MainLayout from '@/pages/admin-dashboard/layouts/MainLayout'
 
 const RouterStack = createBrowserRouter(
   createRoutesFromElements(
@@ -37,6 +37,53 @@ const RouterStack = createBrowserRouter(
           const { Home } = await import('@/pages/Home')
           return {
             Component: Home,
+          }
+        }}
+      />
+
+      {/* Admin Routes */}
+      <Route
+        element={
+          <Suspense fallback={<Spinner />}>
+            <MainLayout />
+          </Suspense>
+        }
+      >
+        <Route
+          path="/admin/dashboard"
+          lazy={async () => {
+            const { default: Dashboard } = await import('@/pages/admin-dashboard/pages/Dashboard')
+            return {
+              Component: Dashboard,
+            }
+          }}
+        />
+        <Route
+          path="/admin/flagged"
+          lazy={async () => {
+            const { default: FlaggedPosts } = await import('@/pages/admin-dashboard/pages/FlaggedPosts')
+            return {
+              Component: FlaggedPosts,
+            }
+          }}
+        />
+        <Route
+          path="/admin/verification"
+          lazy={async () => {
+            const { default: VerificationPage } = await import('@/pages/admin-dashboard/pages/VerificationPage')
+            return {
+              Component: VerificationPage,
+            }
+          }}
+        />
+      </Route>
+
+      <Route
+        path="/admin/login"
+        lazy={async () => {
+          const { default: AdminLogin } = await import('@/pages/admin-dashboard/pages/Login')
+          return {
+            Component: AdminLogin,
           }
         }}
       />
